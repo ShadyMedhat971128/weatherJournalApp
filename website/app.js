@@ -18,15 +18,19 @@ document.getElementById('generate').addEventListener('click',performAction);
 /* Function called by event listener */
 function performAction(e){
     //console.log("event listener is running")
-    const zipCode = document.getElementById('zip').value;
-    feelings = document.getElementById("feelings").value;
+    let zipCode=0;
+        zipCode = document.getElementById('zip').value;
+        if(zipCode != 0)
+        {
+            feelings = document.getElementById("feelings").value;
     tempData =getWeatherData(baseURL,zipCode,apiKey)
     .then(function(tempData){
         data['date']=newDate;
         data['temp']=tempData.main.temp;
         data['feel']=feelings;
         postData('/add',data);
-    }).then(updateUI())
+    }).then(()=>updateUI())
+        }
 }
 /* Function to GET Web API Data*/
 const getWeatherData = async(url,code,key)=>{
